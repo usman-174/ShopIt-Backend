@@ -1,35 +1,46 @@
 {
-  "name": "exp-ts-template",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "watch": "tsc -w",
-    "dev": "nodemon build/index.js",
-    "start": "tsc && node build/index.js",
-    "dev2": "nodemon --exec ts-node src/index.ts",
-    "typeorm": "ts-node ./node_modules/typeorm/cli.js",
-    "orm:generate": "npm run typeorm migration:generate -- -n test",
-    "orm:run": "npm run typeorm migration:run"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "pg": "^8.5.1",
-    "reflect-metadata": "^0.1.10",
-    "typeorm": "0.2.30",
-    "mysql": "^2.14.1"
-  },
-  "devDependencies": {
-    "@types/cors": "^2.8.10",
-    "@types/express": "^4.17.11",
-    "nodemon": "^2.0.7",
-    "ts-node": "3.3.0",
-    "typescript": "3.3.3333",
-    "@types/node": "^8.0.29"
-  }
+    "name": "ecommerce",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "watch": "tsc -w",
+        "dev": "nodemon build/index.js",
+        "start": "node build/index.js",
+        "dev2": "nodemon --exec ts-node src/index.ts"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "cloudinary": "^1.27.0",
+        "cookie-parser": "^1.4.5",
+        "cors": "^2.8.5",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "express-fileupload": "^1.2.1",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^5.13.4",
+        "nodemailer": "^6.6.3",
+        "reflect-metadata": "^0.1.10",
+        "stripe": "^8.176.0",
+        "validator": "^13.6.0"
+    },
+    "devDependencies": {
+        "@types/bcryptjs": "^2.4.2",
+        "@types/cookie-parser": "^1.4.2",
+        "@types/cors": "^2.8.10",
+        "@types/express": "^4.17.11",
+        "@types/express-fileupload": "^1.1.7",
+        "@types/jsonwebtoken": "^8.5.4",
+        "@types/mongoose": "^5.11.97",
+        "@types/node": "^8.0.29",
+        "@types/nodemailer": "^6.4.4",
+        "@types/stripe": "^8.0.417",
+        "@types/validator": "^13.6.3",
+        "nodemon": "^2.0.7",
+        "ts-node": "3.3.0",
+        "typescript": "3.3.3333"
+    }
 }
