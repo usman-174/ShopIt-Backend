@@ -9,5 +9,6 @@ export default ()=>{
     }).then(con=>{
         console.log('DATABASE CONNECTED WITH HOST '+con.connection.host)
         console.log('-----------------------------------------');
-    })
+    }).catch(err=>{console.log('Failed to connect to database '+err.message)
+        console.log('-----------------------------------------');})
 }
