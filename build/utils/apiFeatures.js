@@ -19,13 +19,13 @@ class ApiFeatures {
     }
     filter() {
         const defaultQuery = {
-            keyword: 'cap',
+            keyword: '',
             page: '1',
             price: { lte: '1000', gte: '1' },
             ratings: { gte: '0' }
         };
         if (defaultQuery === this.queryStr) {
-            this.query = this.query.find(defaultQuery);
+            this.query = this.query.find();
             return this;
         }
         const queryCopy = Object.assign({}, this.queryStr);
