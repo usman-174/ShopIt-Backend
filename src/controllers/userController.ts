@@ -133,6 +133,7 @@ export const profileUpdate = catchAsyncError(async (req: Request, res: Response,
     let profileData : {email?:string,name?:string,avatar ? : {public_id?:string,url?:string}} = {
         name: req.body.name || res.locals.user.name || undefined,
         email: req.body.email || res.locals.user.email || undefined,
+        avatar:{}
     }
    
 
@@ -141,7 +142,7 @@ export const profileUpdate = catchAsyncError(async (req: Request, res: Response,
     }
 
         
-    if(req.body.avatar){
+    if(req.body.avatar || req.body.avatar !== ''){
         console.log("Req.Body.Avatar Found ")
     
         const currentUser = await User.findById(res.locals.user._id)
@@ -153,9 +154,15 @@ export const profileUpdate = catchAsyncError(async (req: Request, res: Response,
         
         const response= await saveImage(req.body.avatar,next,"avatars") 
         console.log("Image uploaded to cloudinaruy")
-        
-        profileData.avatar!.public_id = response!.public_id
-        profileData.avatar!.url = response!.url
+        if(response){
+
+            profileData.avatar = {
+                public_id: response.public_id,
+                url: response.secure_url
+            }
+        }else{
+            delete profileData.avatar
+        }
         
     }
     const user = await User.findByIdAndUpdate(res.locals.user._id, (profileData as any), {
