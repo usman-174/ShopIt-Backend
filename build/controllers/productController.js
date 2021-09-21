@@ -9,9 +9,8 @@ const errorHandler_1 = require("../utils/errorHandler");
 const catchAsyncError_1 = __importDefault(require("../middlewares/catchAsyncError"));
 const Cloudinary_1 = require("../utils/Cloudinary");
 exports.getProducts = catchAsyncError_1.default(async (req, res) => {
-    const resPerPage = 4;
+    const resPerPage = 5;
     const productsCount = await Product_1.default.countDocuments();
-    console.log(req.query);
     const apiFeatures = new apiFeatures_1.ApiFeatures(Product_1.default.find(), req.query)
         .search()
         .filter();
@@ -19,7 +18,6 @@ exports.getProducts = catchAsyncError_1.default(async (req, res) => {
     let filteredProductsCount = products.length;
     apiFeatures.pagination(resPerPage);
     products = await apiFeatures.query;
-    console.log("\nfilteredProductsCount=", filteredProductsCount);
     res.status(200).json({
         success: true,
         productsCount,
