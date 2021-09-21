@@ -22,7 +22,9 @@ export const sendEmail = async (options :
         to :options.email,
         subject : options.subject,
         text : options.message,
-        html : `<a href="${options.resetUrl}" >${options.message}</a>`
+        html : `<body><br/>
+        <a href="${options.resetUrl}" >Click here to reset password</a></body>
+        `
       }
       await transport.sendMail(message)
 }
