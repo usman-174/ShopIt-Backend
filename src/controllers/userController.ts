@@ -130,24 +130,22 @@ export const updatePassword = catchAsyncError(async (req: Request, res: Response
 // Profile Update ROUTE -----------------------------c
 export const profileUpdate = catchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
     
-    let profileData = {
+    let profileData : {email?:string,name?:string,avatar ? : {public_id?:string,url?:string}} = {
         name: req.body.name || res.locals.user.name || undefined,
         email: req.body.email || res.locals.user.email || undefined,
-        avatar : {public_id:"",url:""}
     }
    
 
     if(!req.body.email.includes("@")){
         return next(new errorHandler("Please Enter a valid Email.", 400))
-
     }
 
         
     if(req.body.avatar){
         console.log("Req.Body.Avatar Found ")
     
-        const user = await User.findById(res.locals.user._id)
-        const image_id= (user as IUser).avatar.public_id
+        const currentUser = await User.findById(res.locals.user._id)
+        const image_id= (currentUser as IUser).avatar.public_id
         if(!image_id.includes("q0lqv7v93visbefxvosq")){
 
             await destroyImage(image_id,next)
@@ -156,13 +154,11 @@ export const profileUpdate = catchAsyncError(async (req: Request, res: Response,
         const response= await saveImage(req.body.avatar,next,"avatars") 
         console.log("Image uploaded to cloudinaruy")
         
-        profileData.avatar.public_id = String(response!.public_id)
-        profileData.avatar.url = String(response!.url) 
-        }else{
-            profileData.avatar = undefined as any
-        }
+        profileData.avatar!.public_id = response!.public_id
+        profileData.avatar!.url = response!.url
         
-    const user = await User.findByIdAndUpdate(res.locals.user._id, profileData, {
+    }
+    const user = await User.findByIdAndUpdate(res.locals.user._id, (profileData as any), {
         new: true, runValidators: true, useFindAndModify: false
     })
     return res.status(200).json({ success: true, user })
