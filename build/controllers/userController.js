@@ -141,7 +141,7 @@ exports.profileUpdate = catchAsyncError_2.default(async (req, res, next) => {
             console.log("Image uploaded to cloudinaruy");
             profileData.avatar = {
                 public_id: response.public_id,
-                url: response.secure_url
+                url: response.url
             };
         }
         else {
@@ -151,6 +151,7 @@ exports.profileUpdate = catchAsyncError_2.default(async (req, res, next) => {
     else {
         delete profileData.avatar;
     }
+    console.log('ProfileData=', profileData);
     const user = await User_1.default.findByIdAndUpdate(res.locals.user._id, profileData, {
         new: true, runValidators: true, useFindAndModify: false
     });

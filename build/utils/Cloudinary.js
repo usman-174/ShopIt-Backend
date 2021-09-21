@@ -19,7 +19,6 @@ exports.saveImage = async (avatar, next, folder) => {
             crop: folder === "avatars" ? "fill" : "fit",
             folder
         });
-        console.log("id=", result.public_id, "\n url=", result.secure_url);
         return {
             public_id: result.public_id,
             url: result.secure_url

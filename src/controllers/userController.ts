@@ -161,7 +161,7 @@ export const profileUpdate = catchAsyncError(async (req: Request, res: Response,
 
             profileData.avatar = {
                 public_id: response.public_id,
-                url: response.secure_url
+                url: response.url
             }
         }else{
             delete profileData.avatar
@@ -170,6 +170,8 @@ export const profileUpdate = catchAsyncError(async (req: Request, res: Response,
     }else{
         delete profileData.avatar
     }
+    console.log('ProfileData=',profileData);
+    
     const user = await User.findByIdAndUpdate(res.locals.user._id, (profileData as any), {
         new: true, runValidators: true, useFindAndModify: false
     })
