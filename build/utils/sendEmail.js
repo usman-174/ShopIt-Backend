@@ -7,8 +7,10 @@ const nodemailer_1 = __importDefault(require("nodemailer"));
 exports.sendEmail = async (options) => {
     const transport = nodemailer_1.default.createTransport({
         service: "gmail",
-        host: 'smtp.gmail.com',
         port: parseInt(process.env.SMTP_PORT),
+        tls: {
+            rejectUnauthorized: false
+        },
         auth: {
             user: process.env.SMTP_USER,
             pass: process.env.SMTP_PASS
