@@ -26,6 +26,7 @@ export const getProducts = CatchError(async (req: Request, res: Response) => {
 
     apiFeatures.pagination(resPerPage)
     products = await apiFeatures.query;
+console.log(products);
 
 
     res.status(200).json({
