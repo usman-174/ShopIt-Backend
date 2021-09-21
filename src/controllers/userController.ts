@@ -144,7 +144,7 @@ export const profileUpdate = catchAsyncError(async (req: Request, res: Response,
         console.log("avatar=",req.body.avatar);
         console.log("typeof avatar=",typeof req.body.avatar);
         
-    if(req.body.avatar !== ''){
+    if(typeof req.body.avatar !== "undefined" ){
         console.log("Req.Body.Avatar Found")
     
         const currentUser = await User.findById(res.locals.user._id)

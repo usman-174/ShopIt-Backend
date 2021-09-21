@@ -128,7 +128,7 @@ exports.profileUpdate = catchAsyncError_2.default(async (req, res, next) => {
     }
     console.log("avatar=", req.body.avatar);
     console.log("typeof avatar=", typeof req.body.avatar);
-    if (req.body.avatar !== '') {
+    if (typeof req.body.avatar !== "undefined") {
         console.log("Req.Body.Avatar Found");
         const currentUser = await User_1.default.findById(res.locals.user._id);
         const image_id = currentUser.avatar.public_id;
