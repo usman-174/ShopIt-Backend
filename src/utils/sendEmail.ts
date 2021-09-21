@@ -9,9 +9,9 @@ export const sendEmail = async (options :
       service:"gmail",
       // host: 'smtp.gmail.com',
       // port: parseInt(process.env.SMTP_PORT as string),
-      tls:{
-        rejectUnauthorized:false 
-      },
+      // tls:{
+      //   rejectUnauthorized:false 
+      // },
       auth: {
         user: "hellmughal123@gmail.com",
         pass: "speed123" 

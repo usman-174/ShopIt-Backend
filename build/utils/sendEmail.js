@@ -7,9 +7,6 @@ const nodemailer_1 = __importDefault(require("nodemailer"));
 exports.sendEmail = async (options) => {
     const transport = nodemailer_1.default.createTransport({
         service: "gmail",
-        tls: {
-            rejectUnauthorized: false
-        },
         auth: {
             user: "hellmughal123@gmail.com",
             pass: "speed123"
