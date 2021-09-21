@@ -142,7 +142,7 @@ export const profileUpdate = catchAsyncError(async (req: Request, res: Response,
     }
 
         
-    if(req.body.avatar || req.body.avatar !== ''){
+    if(req.body.avatar !== ''){
         console.log("Req.Body.Avatar Found ")
     
         const currentUser = await User.findById(res.locals.user._id)
@@ -153,8 +153,8 @@ export const profileUpdate = catchAsyncError(async (req: Request, res: Response,
         }
         
         const response= await saveImage(req.body.avatar,next,"avatars") 
-        console.log("Image uploaded to cloudinaruy")
         if(response){
+            console.log("Image uploaded to cloudinaruy")
 
             profileData.avatar = {
                 public_id: response.public_id,

@@ -126,7 +126,7 @@ exports.profileUpdate = catchAsyncError_2.default(async (req, res, next) => {
     if (!req.body.email.includes("@")) {
         return next(new errorHandler_1.errorHandler("Please Enter a valid Email.", 400));
     }
-    if (req.body.avatar || req.body.avatar !== '') {
+    if (req.body.avatar !== '') {
         console.log("Req.Body.Avatar Found ");
         const currentUser = await User_1.default.findById(res.locals.user._id);
         const image_id = currentUser.avatar.public_id;
@@ -134,8 +134,8 @@ exports.profileUpdate = catchAsyncError_2.default(async (req, res, next) => {
             await Cloudinary_1.destroyImage(image_id, next);
         }
         const response = await Cloudinary_1.saveImage(req.body.avatar, next, "avatars");
-        console.log("Image uploaded to cloudinaruy");
         if (response) {
+            console.log("Image uploaded to cloudinaruy");
             profileData.avatar = {
                 public_id: response.public_id,
                 url: response.secure_url
