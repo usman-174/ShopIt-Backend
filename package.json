@@ -10,9 +10,9 @@
         "dev2": "nodemon --exec ts-node src/index.ts"
     },
     "keywords": [],
-	"engines": {
-    "node": ">=12"
-		},
+    "engines": {
+        "node": ">=12"
+    },
     "author": "",
     "license": "ISC",
     "dependencies": {

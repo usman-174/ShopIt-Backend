@@ -11,8 +11,8 @@ import cookieParser from 'cookie-parser'
 import cloud from './utils/Cloudinary'
 import fileUpload from 'express-fileupload'
 import paymentController from './routes/payment';
-if( process.env.NODE_ENV !== "production"){
 
+if( process.env.NODE_ENV !== "production"){
   dotenv.config();
 }
 

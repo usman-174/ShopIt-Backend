@@ -6,7 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const nodemailer_1 = __importDefault(require("nodemailer"));
 exports.sendEmail = async (options) => {
     const transport = nodemailer_1.default.createTransport({
-        host: process.env.SMTP_HOST,
+        service: "gmail",
+        host: 'smtp.gmail.com',
         port: parseInt(process.env.SMTP_PORT),
         auth: {
             user: process.env.SMTP_USER,
@@ -17,7 +18,8 @@ exports.sendEmail = async (options) => {
         from: `${process.env.SMTP_FROM_EMAIL} <${process.env.SMTP_FROM_EMAIL}>`,
         to: options.email,
         subject: options.subject,
-        text: options.message
+        text: options.message,
+        html: `<a href="${options.resetUrl}" >${options.message}</a>`
     };
     await transport.sendMail(message);
 };

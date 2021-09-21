@@ -72,7 +72,7 @@ export const forgotPassword = CatchError(async (req: Request, res: Response, nex
     const resetUrl = `${process.env.ORIGIN}/reset-password/${resetToken}`
     const message = `Your password reset token is as follow \n\n ${resetUrl}. If you did not request this email then please ignore this mail.`
     try {
-        await sendEmail({ email: user.email, message, subject: "Password forget" })
+        await sendEmail({ email: user.email, message, subject: "Password forget",resetUrl })
         return res.status(203).json({ success: true, message: `Please check you email at ${user.email} for password recovery` })
     } catch (error) {
         user.resetPasswordExpire = undefined as undefined
