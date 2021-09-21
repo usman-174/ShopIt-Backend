@@ -126,11 +126,14 @@ exports.profileUpdate = catchAsyncError_2.default(async (req, res, next) => {
     if (!req.body.email.includes("@")) {
         return next(new errorHandler_1.errorHandler("Please Enter a valid Email.", 400));
     }
+    console.log("avatar=", req.body.avatar);
+    console.log("typeof avatar=", typeof req.body.avatar);
     if (req.body.avatar !== '') {
-        console.log("Req.Body.Avatar Found ");
+        console.log("Req.Body.Avatar Found");
         const currentUser = await User_1.default.findById(res.locals.user._id);
         const image_id = currentUser.avatar.public_id;
         if (!image_id.includes("q0lqv7v93visbefxvosq")) {
+            console.log('Destrying Old Image');
             await Cloudinary_1.destroyImage(image_id, next);
         }
         const response = await Cloudinary_1.saveImage(req.body.avatar, next, "avatars");

@@ -141,14 +141,17 @@ export const profileUpdate = catchAsyncError(async (req: Request, res: Response,
         return next(new errorHandler("Please Enter a valid Email.", 400))
     }
 
+        console.log("avatar=",req.body.avatar);
+        console.log("typeof avatar=",typeof req.body.avatar);
         
     if(req.body.avatar !== ''){
-        console.log("Req.Body.Avatar Found ")
+        console.log("Req.Body.Avatar Found")
     
         const currentUser = await User.findById(res.locals.user._id)
         const image_id= (currentUser as IUser).avatar.public_id
         if(!image_id.includes("q0lqv7v93visbefxvosq")){
-
+                console.log('Destrying Old Image');
+                
             await destroyImage(image_id,next)
         }
         
