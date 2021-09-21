@@ -31,7 +31,7 @@ export class ApiFeatures {
 
 
     }
-    pagination(resultPerPage) {
+    pagination(resultPerPage:number) {
         const currentPage=Number(this.queryStr.page) || 1
         const toSkip = resultPerPage * (currentPage-1) 
 
