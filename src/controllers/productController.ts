@@ -14,7 +14,7 @@ import CatchError from '../middlewares/catchAsyncError'
 import { destroyImage, saveImage } from '../utils/Cloudinary';
 // GET PRODUCT ------------------------------
 export const getProducts = CatchError(async (req: Request, res: Response) => {
-    const resPerPage = 6;
+    const resPerPage = 4;
     const productsCount = await Product.countDocuments();
 
     const apiFeatures = new ApiFeatures(Product.find(), req.query)
