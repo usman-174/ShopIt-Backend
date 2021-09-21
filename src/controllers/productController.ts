@@ -16,7 +16,8 @@ import { destroyImage, saveImage } from '../utils/Cloudinary';
 export const getProducts = CatchError(async (req: Request, res: Response) => {
     const resPerPage = 4;
     const productsCount = await Product.countDocuments();
-
+    console.log(req.query);
+    
     const apiFeatures = new ApiFeatures(Product.find(), req.query)
         .search()
         .filter()
@@ -26,7 +27,7 @@ export const getProducts = CatchError(async (req: Request, res: Response) => {
 
     apiFeatures.pagination(resPerPage)
     products = await apiFeatures.query;
-console.log(products);
+console.log("\nfilteredProductsCount=",filteredProductsCount);
 
 
     res.status(200).json({
