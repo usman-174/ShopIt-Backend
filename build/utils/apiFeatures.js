@@ -18,6 +18,16 @@ class ApiFeatures {
         return this;
     }
     filter() {
+        const defaultQuery = {
+            keyword: 'cap',
+            page: '1',
+            price: { lte: '1000', gte: '1' },
+            ratings: { gte: '0' }
+        };
+        if (defaultQuery === this.queryStr) {
+            this.query = this.query.find(defaultQuery);
+            return this;
+        }
         const queryCopy = Object.assign({}, this.queryStr);
         const removeFields = ['keyword', 'limit', 'page'];
         removeFields.forEach(el => delete queryCopy[el]);
