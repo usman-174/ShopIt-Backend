@@ -164,6 +164,8 @@ export const profileUpdate = catchAsyncError(async (req: Request, res: Response,
             delete profileData.avatar
         }
         
+    }else{
+        delete profileData.avatar
     }
     const user = await User.findByIdAndUpdate(res.locals.user._id, (profileData as any), {
         new: true, runValidators: true, useFindAndModify: false

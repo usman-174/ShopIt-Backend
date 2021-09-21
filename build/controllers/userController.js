@@ -121,25 +121,32 @@ exports.profileUpdate = catchAsyncError_2.default(async (req, res, next) => {
     let profileData = {
         name: req.body.name || res.locals.user.name || undefined,
         email: req.body.email || res.locals.user.email || undefined,
-        avatar: { public_id: "", url: "" }
+        avatar: {}
     };
     if (!req.body.email.includes("@")) {
         return next(new errorHandler_1.errorHandler("Please Enter a valid Email.", 400));
     }
-    if (req.body.avatar) {
+    if (req.body.avatar || req.body.avatar !== '') {
         console.log("Req.Body.Avatar Found ");
-        const user = await User_1.default.findById(res.locals.user._id);
-        const image_id = user.avatar.public_id;
+        const currentUser = await User_1.default.findById(res.locals.user._id);
+        const image_id = currentUser.avatar.public_id;
         if (!image_id.includes("q0lqv7v93visbefxvosq")) {
             await Cloudinary_1.destroyImage(image_id, next);
         }
         const response = await Cloudinary_1.saveImage(req.body.avatar, next, "avatars");
         console.log("Image uploaded to cloudinaruy");
-        profileData.avatar.public_id = String(response.public_id);
-        profileData.avatar.url = String(response.url);
+        if (response) {
+            profileData.avatar = {
+                public_id: response.public_id,
+                url: response.secure_url
+            };
+        }
+        else {
+            delete profileData.avatar;
+        }
     }
     else {
-        profileData.avatar = undefined;
+        delete profileData.avatar;
     }
     const user = await User_1.default.findByIdAndUpdate(res.locals.user._id, profileData, {
         new: true, runValidators: true, useFindAndModify: false
