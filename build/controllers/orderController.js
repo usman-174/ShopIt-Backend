@@ -28,7 +28,7 @@ exports.myOrders = catchAsyncError_1.default(async (_, res, next) => {
         user: res.locals.user._id
     });
     if (!orders || !orders.length)
-        return next(new errorHandler_1.errorHandler("No order currently", 3404));
+        return next(new errorHandler_1.errorHandler("You haven't Ordered anything Yet. :( ", 404));
     return res.status(200).json({
         success: true,
         orders

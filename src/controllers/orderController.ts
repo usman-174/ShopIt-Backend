@@ -40,7 +40,7 @@ export const myOrders = catchAsyncError(async (_: Request, res: Response, next: 
     const orders = await Order.find({
         user: res.locals.user._id
     })
-    if (!orders || !orders.length) return next(new errorHandler("No order currently", 3404))
+    if (!orders || !orders.length) return next(new errorHandler("You haven't Ordered anything Yet. :( ", 404))
     return res.status(200).json({
         success: true,
         orders
