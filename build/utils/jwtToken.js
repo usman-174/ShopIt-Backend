@@ -5,7 +5,9 @@ exports.sendToken = (user, statusCode, res) => {
     user.password = undefined;
     const options = {
         expires: new Date(Date.now() + parseInt(String(process.env.COOKIE_EXPIRES_TIME)) * 24 * 60 * 60 * 1000),
-        httpOnly: true
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production" ? true : false,
+        sameSite: "lax"
     };
     return res.status(statusCode).cookie('token', token, options).json({ success: true, user, token });
 };
