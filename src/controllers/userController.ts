@@ -225,8 +225,13 @@ export const AdminDeleteUser = catchAsyncError(async (req: Request, res: Respons
 // LOGOUT ROUTE -----------------------------c
 export const Logout = CatchError(async (_: Request, res: Response,) => {
     res.locals.user = undefined
-    res.cookie('token', null, {
-        expires: new Date(Date.now())
+    res.cookie('token',"",{
+        expires : new Date(Date.now() + parseInt(String(process.env.COOKIE_EXPIRES_TIME)) * 24*60*60 *1000),
+        httpOnly:true, 
+        sameSite: "none",
+        secure : process.env.NODE_ENV === "production"?true:false,
+        path:"/", 
+         
     }).json({ success: true })
 
 })
