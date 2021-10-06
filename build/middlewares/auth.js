@@ -12,7 +12,11 @@ exports.authMiddleware = catchAsyncError_1.default(async (req, res, next) => {
     if (!token) {
         return next(new errorHandler_1.errorHandler("Please login first", 400));
     }
+    console.log("token= ", token);
     const decoded = jsonwebtoken_1.default.verify(token, String(process.env.JWT_SECRET));
+    if (!decoded) {
+        return next(new errorHandler_1.errorHandler("Please login again", 401));
+    }
     const user = await User_1.default.findById(decoded.id);
     if (!user) {
         return next(new errorHandler_1.errorHandler("Please login again", 401));

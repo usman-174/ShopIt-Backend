@@ -9,7 +9,13 @@ export const authMiddleware = catchAsyncError(async (req: Request, res: Response
     if (!token) {
         return next(new errorHandler("Please login first", 400))
     }
+    console.log("token= ",token);
+    
     const decoded = JWT.verify(token, String(process.env.JWT_SECRET)) as JWT.JwtPayload
+    if(!decoded){
+        return next(new errorHandler("Please login again", 401))
+
+    }
     const user = await User.findById(decoded.id)
     if (!user) {
         return next(new errorHandler("Please login again", 401))
