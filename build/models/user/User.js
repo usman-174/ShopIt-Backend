@@ -54,7 +54,7 @@ UserSchema.pre('save', async function (next) {
         next();
     }
     ;
-    this.password = await bcryptjs_1.default.hash(String(this.password), 10);
+    this.password = await bcryptjs_1.default.hashSync(String(this.password));
 });
 UserSchema.methods.getJwtToken = function () {
     return jsonwebtoken_1.default.sign({ id: this._id }, String(process.env.JWT_SECRET), {

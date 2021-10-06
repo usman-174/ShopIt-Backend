@@ -57,6 +57,9 @@ exports.login = catchAsyncError_1.default(async (req, res, next) => {
         if (!match) {
             return next(new errorHandler_1.errorHandler("Invalid Email or Password", 401));
         }
+        user.password = undefined;
+        user.resetPasswordToken = undefined;
+        user.resetPasswordExpire = undefined;
         jwtToken_1.sendToken(user, 200, res);
     }
 });
