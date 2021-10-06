@@ -53,6 +53,9 @@ export const login = CatchError(async (req: Request, res: Response, next: NextFu
         if (!match) {
             return next(new errorHandler("Invalid Email or Password", 401))
         }
+        user.password = undefined
+        user.resetPasswordToken=undefined
+        user.resetPasswordExpire=undefined
         sendToken(user, 200, res)
     }
 
