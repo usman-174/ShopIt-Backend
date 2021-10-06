@@ -7,7 +7,7 @@ exports.sendToken = (user, statusCode, res) => {
         httpOnly: true,
         sameSite: "none",
         secure: process.env.NODE_ENV === "production" ? true : false,
-        path: "/api",
+        path: "/",
     }).json({ success: true, user });
 };
 //# sourceMappingURL=jwtToken.js.map

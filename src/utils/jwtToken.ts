@@ -9,7 +9,7 @@ export const sendToken = (user:IUser,statusCode:number,res:Response)=>{
         httpOnly:true, 
         sameSite: "none",
         secure : process.env.NODE_ENV === "production"?true:false,
-        path:"/api",
+        path:"/",
          
     }).json({success:true,user})
 }
