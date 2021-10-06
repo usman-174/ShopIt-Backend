@@ -7,7 +7,9 @@ export const sendToken = (user:IUser,statusCode:number,res:Response)=>{
     const options :CookieOptions= {
         expires : new Date(Date.now() + parseInt(String(process.env.COOKIE_EXPIRES_TIME)) * 24*60*60 *1000),
         httpOnly:true, 
+        sameSite: "none" 
         
     }
-    return res.status(statusCode).cookie('token',token,options).json({success:true,user,token})
+    delete user["resetPasswordExpire"]
+    return res.status(statusCode).cookie('token',token,options).json({success:true,user})
 }

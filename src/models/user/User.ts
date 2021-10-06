@@ -57,7 +57,7 @@ UserSchema.pre('save', async function (this: IUser, next) {
         next()
     };
     
-    this.password = await bcryptjs.hash(String(this.password), 10)
+    this.password = await bcryptjs.hashSync(String(this.password))
 })
 UserSchema.methods.getJwtToken = function () {
     return jwt.sign({ id: this._id }, String(process.env.JWT_SECRET), {
